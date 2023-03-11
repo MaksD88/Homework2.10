@@ -1,4 +1,5 @@
 package ru.netology;
+
 public class Radio {
 
 
@@ -26,7 +27,7 @@ public class Radio {
     }
 
 
-   
+    
 
     public int getNumberCurrentStation() {
         return numberCurrentStation;
@@ -40,7 +41,7 @@ public class Radio {
         return endNumberStation;
     }
 
-   
+    
     public void setNumberCurrentStation(int newNumberCurrentStation) {
         if (newNumberCurrentStation < startNumberStation) {
             return;
@@ -62,7 +63,7 @@ public class Radio {
 
     }
 
- 
+    
     public void prev() {
         if (numberCurrentStation == startNumberStation) {
             numberCurrentStation = endNumberStation;
@@ -76,8 +77,9 @@ public class Radio {
         return soundVolume;
     }
 
+    
 
-   
+    
     public void volumePlus() {
         if (soundVolume == 100) {
             return;
