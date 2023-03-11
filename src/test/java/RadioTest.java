@@ -1,4 +1,5 @@
 import ru.netology.Radio;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class RadioTest {
@@ -53,6 +54,7 @@ public class RadioTest {
     }
 
 
+
     
     @Test
     public void setPreEdgeNumberCurrentStationTest () {
@@ -102,7 +104,7 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-   
+    
     @Test
     public void nextTestValid () {
 
@@ -184,3 +186,63 @@ public class RadioTest {
         for (int i = 0; i < 5; i++) {
             receiver.volumePlus();
         }
+
+        int expected = 5;
+        int actual = receiver.getSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void plusSoundVolumeLimitTest () {
+
+        for (int i = 0; i < 100; i++) {
+            receiver.volumePlus();
+        }
+
+        int expected = 100;
+        int actual = receiver.getSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void plusSoundVolumeOverLimitTest () {
+
+        for (int i = 0; i < 101; i++) {
+            receiver.volumePlus();
+        }
+
+        int expected = 100;
+        int actual = receiver.getSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void minusSoundVolumeTest () {
+
+        receiver.volumeMinus();
+
+        int expected = 0;
+        int actual = receiver.getSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void minusSoundVolumeValidTest () {
+
+        for (int i = 0; i < 3; i++) {
+            receiver.volumePlus();
+        }
+        for (int i = 0; i < 2; i++) {
+            receiver.volumeMinus();
+        }
+
+        int expected = 1;
+        int actual = receiver.getSoundVolume();
+
+        Assertions.assertEquals(expected, actual);
+    }
+}
