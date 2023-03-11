@@ -1,46 +1,48 @@
 import ru.netology.Radio;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class RadioTest {
+    private int radioSize = 2;
+    Radio receiver = new Radio(radioSize);
 
-
+    
     @Test
     public void getNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
-        int expected = 0;
+        int expected = receiver.getStartNumberStation();
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
-
+    
     @Test
     public void setNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
-        receiver.setNumberCurrentStation(11);
+        receiver.setNumberCurrentStation(radioSize);
 
-        int expected = 0;
+        int expected = receiver.getStartNumberStation();
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void setNegativeNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
         receiver.setNumberCurrentStation(-1);
 
-        int expected = 0;
+        int expected = receiver.getStartNumberStation();
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
+    
     @Test
     public void setValidNumberCurrentStationTest () {
+
         Radio receiver = new Radio();
 
         receiver.setNumberCurrentStation(5);
@@ -51,34 +53,24 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void setEdgeNumberCurrentStationTest () {
-        Radio receiver = new Radio();
-
-        receiver.setNumberCurrentStation(9);
-
-        int expected = 9;
-        int actual = receiver.getNumberCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
 
 
+    
     @Test
     public void setPreEdgeNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
-        receiver.setNumberCurrentStation(8);
+        receiver.setNumberCurrentStation(radioSize -1);
 
-        int expected = 8;
+        int expected = receiver.getEndNumberStation();
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
+
+    
     @Test
     public void setZeroNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
         receiver.setNumberCurrentStation(0);
 
@@ -87,10 +79,9 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void setPreZeroNumberCurrentStationTest () {
-        Radio receiver = new Radio();
 
         receiver.setNumberCurrentStation(1);
 
@@ -100,12 +91,11 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-
+    
     @Test
     public void nextTestNine () {
-        Radio receiver = new Radio();
 
-        receiver.setNumberCurrentStation(9);
+        receiver.setNumberCurrentStation(radioSize -1);
         receiver.next();
 
         int expected = 0;
@@ -114,23 +104,26 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    
     @Test
     public void nextTestValid () {
-        Radio receiver = new Radio();
 
-        receiver.setNumberCurrentStation(8);
         receiver.next();
 
-        int expected = 9;
+        int expected = 1;
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
 
+
+    
     @Test
     public void nextComboTestValid () {
+
         Radio receiver = new Radio();
+
         for (int i = 0; i < 4; i++) {
             receiver.next();
         }
@@ -141,30 +134,18 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    public void nextTestValidFirst () {
-        Radio receiver = new Radio();
-
-        receiver.next();
-
-        int expected = 1;
-        int actual = receiver.getNumberCurrentStation();
-
-        Assertions.assertEquals(expected, actual);
-    }
-
+    
     @Test
     public void prevTestZero () {
-        Radio receiver = new Radio();
 
         receiver.prev();
 
-        int expected = 9;
+        int expected = receiver.getEndNumberStation();
         int actual = receiver.getNumberCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void prevTestValid () {
         Radio receiver = new Radio();
@@ -177,10 +158,9 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void getSoundVolumeTest () {
-        Radio receiver = new Radio();
 
         int expected = 0;
         int actual = receiver.getSoundVolume();
@@ -188,9 +168,9 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
+    
     @Test
     public void plusSoundVolumeTest () {
-        Radio receiver = new Radio();
 
         receiver.volumePlus();
 
@@ -199,10 +179,9 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void plusSoundVolumeValidTest () {
-        Radio receiver = new Radio();
 
         for (int i = 0; i < 5; i++) {
             receiver.volumePlus();
@@ -213,38 +192,35 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void plusSoundVolumeLimitTest () {
-        Radio receiver = new Radio();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             receiver.volumePlus();
         }
 
-        int expected = 10;
+        int expected = 100;
         int actual = receiver.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void plusSoundVolumeOverLimitTest () {
-        Radio receiver = new Radio();
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 101; i++) {
             receiver.volumePlus();
         }
 
-        int expected = 10;
+        int expected = 100;
         int actual = receiver.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
     }
-
+    
     @Test
     public void minusSoundVolumeTest () {
-        Radio receiver = new Radio();
 
         receiver.volumeMinus();
 
@@ -253,9 +229,9 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
+    
     @Test
     public void minusSoundVolumeValidTest () {
-        Radio receiver = new Radio();
 
         for (int i = 0; i < 3; i++) {
             receiver.volumePlus();
